@@ -17,11 +17,34 @@ public class TDArrays {
         // grades[2][3] = 100;
 
         int[][] grades = { {72, 74, 78, 76}, {65, 64, 61, 67}, {95, 98, 99, 100} }; 
-        
+
 
         System.out.println("\t Harry: \t" + Arrays.toString(grades[0]));
         System.out.println("\t Ron: \t\t" + Arrays.toString(grades[1]));
         System.out.println("\t Hermione: \t" + Arrays.toString(grades[2]));
+        System.out.println(Arrays.toString(grades[0]));
+
+        for( int j = 0; j < grades[0].length; j++){
+            System.out.println(grades[0][j]);
+        }
+        System.out.println(" ");
+
+        for(int[] grade : grades){
+            System.out.println(grade[0]);
+        }
+        System.out.println(" ");
+
+        for( int i = 0; i < grades.length; i++){
+            System.out.println(grades[i][0]);
+        }
+        System.out.println(" ");
+
+        for( int i = 0; i < grades.length; i++){
+            for( int j = 0; j < grades[i].length; j++){
+                System.out.println(grades[i][j]);
+            }
+        }
+
 
     }
 }
