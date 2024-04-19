@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -72,10 +73,29 @@ public class Hangman {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String misteryWord = randomWord(words);
-        int numOfUnderscores = misteryWord.length();
-        printPlaceholders(numOfUnderscores);
-        char[] arrOfLetters = misteryWord.toCharArray();
+
+        String word = randomWord(words);
+        char[] lettersArr = word.toCharArray();
+        
+        int length = lettersArr.length;
+        int galLength = gallows.length;
+        char guess;
+        char[] placeholders = new char[length];
+        char[] misses = new char[length];
+        Arrays.fill(placeholders, '_');
+
+        System.out.println("Welcome to Hangman game...");
+        System.err.println(gallows[0]);
+        System.out.print("Word: ");
+        printPlaceholders(placeholders);
+        System.out.println("\nMisses: ");
+        System.out.print("Guess: ");
+        guess = scanner.nextLine().charAt(0);
+        System.out.println(guess);
+
+        while()
+
+        
         
 
     }
@@ -86,12 +106,11 @@ public class Hangman {
         return words[chosen];
     }
 
-    public static char[] printPlaceholders(int num) {
-        char[] placeholders = new char[num];
-        for (int i = 0; i < num; i++) {
+    public static void printPlaceholders(char[] placeholders) {
+        for (int i = 0; i < placeholders.length; i++) {
             System.out.print(placeholders[i] + " ");
         }
-        return placeholders;
+       
     }
 
     public static int checkGuess(char guess, char[] arrOfLetters){
@@ -106,6 +125,12 @@ public class Hangman {
     public static char[] updatePlaceholders(int i, char[] placeholders, char letter){
         placeholders[i] = letter;
         return placeholders;
+    }
+
+    public static void printMissedGueses(int num, char miss){
+        
+        
+
     }
 
 
