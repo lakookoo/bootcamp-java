@@ -76,45 +76,47 @@ public class Hangman {
 
         String word = randomWord(words);
         System.out.println(word);
-        char[] lettersArr = word.toCharArray();
 
-        int length = lettersArr.length;
-        int galLength = gallows.length;
-        char guess;
-        char[] placeholders = new char[length];
-        char[] misses = new char[galLength];
+        char[] placeholders = new char[word.length()];
         Arrays.fill(placeholders, '_');
-
+        
+        int misses = 0;
+        char guess;
+        char[] missed = new char[6];
         System.out.println("Welcome to Hangman game...");
 
-        int j = 0;
-        int i = 0;
         do {
-            System.out.println(gallows[j]);
+            System.out.println(gallows[misses]);
             System.out.print("Word: ");
             printPlaceholders(placeholders);
             System.out.print("\nMisses: ");
-            printMissedGueses(misses);
+            printMissedGueses(missed);
             System.out.print("\nGuess: ");
             guess = scanner.nextLine().charAt(0);
-            System.out.println(guess);
-            int checked = checkGuess(guess, lettersArr);
-            if (checked == -1) {
-                if (misses[j] == '\u0000') {
-                    misses[j] = guess;
-                }
-                j++;
-            } else if (j == galLength) {
-                System.out.println("You lost");
+            System.out.print("\n");
+            if(checkGuess(word, guess)){
+                updatePlaceholders(word, placeholders, guess);
             } else {
-                placeholders = updatePlaceholders(checked, placeholders, guess);
-                if (!containsPlaceholders(placeholders)) {
-                    System.out.println("That is it!");
-                    break;
-                }
-
+                missed[misses] = guess;
+                misses++;
             }
-        } while (j <= galLength);
+            if (Arrays.equals(placeholders, word.toCharArray())) {
+                System.out.print(gallows[misses]);
+                System.out.print("\nWord:   ");
+                printPlaceholders(placeholders);
+                System.out.println("\nGOOD WORK!");                
+                break;
+            }
+            
+
+            
+        } while (misses < 6);
+        if (misses == 6) {
+            System.out.print(gallows[6]);
+            System.out.println("\nRIP!");
+            System.out.println("\nThe word was: '" + word + "'");
+        }
+        scanner.close();
 
     }
 
@@ -131,35 +133,32 @@ public class Hangman {
 
     }
 
-    public static int checkGuess(char guess, char[] arrOfLetters) {
-        for (int i = 0; i < arrOfLetters.length; i++) {
-            if (arrOfLetters[i] == guess) {
-                return i;
+    public static boolean checkGuess(String word, char guess) {
+        for (int i = 0; i < word.length(); i++) {
+            if (word.charAt(i) == guess) {
+                return true;
             }
         }
-        return -1;
+        return false;
     }
 
-    public static char[] updatePlaceholders(int i, char[] placeholders, char letter) {
-        if (placeholders[i] == '_') {
-            placeholders[i] = letter;
+    public static void updatePlaceholders(String word, char[] placeholders, char guess) {
+        for(int i = 0; i < word.length(); i ++){
+            if (word.charAt(i) == guess) {
+                placeholders[i] = guess;
+            }
         }
-        return placeholders;
     }
 
     public static void printMissedGueses(char[] misses) {
         for (int i = 0; i < misses.length; i++) {
             System.out.print(misses[i] + " ");
         }
+        System.out.println("\n");
     }
 
-    private static boolean containsPlaceholders(char[] array) {
-        for (char c : array) {
-            if (c == '_') {
-                return true;
-            }
-        }
-        return false;
-    }
+   
+    
+    
 
 }
