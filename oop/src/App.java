@@ -6,6 +6,8 @@ public class App {
         spareParts[0] = "Filter";
         Car nissan2 = new Car(nissan);
 
-        nissan2.drive();
+        System.out.println(dodge);
+        System.out.println(nissan);
+        System.out.println(nissan2);
     }
 }
