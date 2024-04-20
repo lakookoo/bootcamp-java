@@ -19,8 +19,8 @@ public class App {
             new Movie("The Lord of the Rings: The Fellowship of the Ring", "DVD", 8.8)
         };
 
-        for (int i = 0; i < movies.length; i++) {
-            store.setMovie(i, movies[i]);
+        for ( Movie movie : movies) {
+            store.addMovie( movie );
         }
 
         printStore();
