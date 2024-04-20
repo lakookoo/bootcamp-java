@@ -1,32 +1,26 @@
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class App {
-    public static void main(String[] args)  {
-        List<String> cities = new LinkedList<>();
-       
-        cities.add("Paris");
-        cities.add("Florence");
-        cities.add("Venice");
-        cities.add("Versailles");
-        cities.add("London");
-        cities.add("Petra");
-        cities.add("Oslo");
-        cities.add("Rome");
-        cities.add("Madrid");
-        cities.add("Tokyo");
-        cities.add("Prague");
-        cities.add("Dublin");
-        cities.add("Athens");
-        cities.add("Marseille");
-        cities.add("Chicago");
+    public static void main(String[] args) {
 
-        System.out.println(cities.size());
-        System.out.println(cities.get(5));
-        System.out.println(cities.get(8));
-        cities.set(2, "Naples");
-        cities.remove(5);
+        City paris = new City("Paris", 2161000);
+        //City copy = paris;
+        City copy = new City(paris);
 
+        System.out.println(paris.equals(copy));
+        copy.setPopulation(2059003);
+        paris.setPopulation(3129003);
+
+        ArrayList<City> cities = new ArrayList<>();
+        cities.add(new City("Paris", 2161000));
+        cities.add(new City("Florence", 382258));
+        cities.add(new City("Venice", 261905));
+        cities.add(new City("Versailles", 85771));
+        cities.add(new City("London", 8982000));
+        
+        System.out.println(cities.contains(paris));
     }
+
 }
