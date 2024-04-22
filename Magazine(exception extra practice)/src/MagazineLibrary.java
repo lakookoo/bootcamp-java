@@ -12,7 +12,7 @@ public class MagazineLibrary {
     }
 
     public void setMagazine(Magazine newMagazine, int index){
-       this.magazines.add(index, new Magazine(newMagazine));
+       this.magazines.set(index, new Magazine(newMagazine));
     }
 
     public void addMagazine(Magazine newMagazine){
