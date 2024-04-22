@@ -16,7 +16,7 @@ public class Store {
 
     public void setMovie(int index, Movie newMovie){
         Movie copy = new Movie(newMovie);
-        this.movies.add(index, copy);
+        this.movies.set(index, copy);
     }
 
     public void addMovie(Movie movie) {
