@@ -4,13 +4,14 @@ public class User {
     private int age;
 
     public int getAge() {
-        if (age < 0) {
-            throw new IllegalArgumentException("Age cannot be negative");
-        }
+        
         return this.age;
     }
 
     public void setAge(int age) { 
+        if (age < 0) {
+            throw new IllegalArgumentException("Age cannot be negative");
+        }
         this.age = age;
     }
 
