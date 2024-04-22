@@ -2,29 +2,26 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class App {
+public class Main {
 
     static Store store = new Store();
 
     public static void main(String[] args) {
-        
         try {
             loadMovies("movies.txt");
             printStore();
             userInput();
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
+            System.out.println("Current Directory: " + System.getProperty("user.dir"));
         }
-
-        
-        
     }
 
     public static void userInput() {
         Scanner scanner = new Scanner(System.in);
         String status = "continue";
-    
         while (status.equals("continue")) {
+
             int choice = (promptForChoice(scanner));
             Movie movie = store.getMovie(choice);
             double rating = promptForRating(scanner, movie.getName());
@@ -41,62 +38,55 @@ public class App {
     public static int promptForChoice(Scanner scanner) {
         while (true) {
             System.out.print("\nPlease choose an integer between 0 - 9: ");
-
-            if(!scanner.hasNextInt()){
+            if (!scanner.hasNextInt()) {
                 scanner.next();
                 continue;
             }
+
             int choice = scanner.nextInt();
-            if(incorrectChoice(choice)) continue;
+            if (incorrectChoice(choice)) continue;
             else return choice;
         }
     }
 
     public static boolean incorrectChoice(int choice) {
-        if(choice > 0 || choice <= 9) {
-            return true;
-        }
-        return false;
+        return choice < 0 || choice > 9; 
     }
 
     public static double promptForRating(Scanner scanner, String name) {
         while (true) {
             System.out.print("\nSet a new rating for " + name + ": ");
-            
-            if(!scanner.hasNextDouble()){
+            if (!scanner.hasNextDouble()) {
                 scanner.next();
                 continue;
-            }
+            } 
 
             double rating = scanner.nextDouble();
-            
-            if(incorrectRating(rating)) continue;
+            if (incorrectRating(rating)) continue;
             else return rating;
          }
     }
 
     public static boolean incorrectRating(double rating) {
-        if( rating > 0 || rating <= 10){
-            return true;
-        }
-        return false;
+        return rating < 0 || rating > 10;
     }
 
-    public static void loadMovies(String fileName) throws FileNotFoundException {
-        FileInputStream fis = new FileInputStream(fileName);
-        Scanner scanFile = new Scanner(fis);
+     public static void loadMovies(String fileName) throws FileNotFoundException {
+         FileInputStream fis = new FileInputStream(fileName);
+         Scanner scanFile = new Scanner(fis);
 
-        while (scanFile.hasNextLine()) {
-            String line = scanFile.nextLine();
-            String[] words = line.split("--");
-            store.addMovie(new Movie(words[0], words[1], Double.parseDouble(words[2])));
-        }
-        scanFile.close();
-   }
+         while (scanFile.hasNextLine()) {
+             String line = scanFile.nextLine();
+             String[] words = line.split("--");
+             store.addMovie(new Movie(words[0], words[1], Double.parseDouble(words[2])));
+         }
+         scanFile.close();
+     }
 
-    public static void printStore() {
+     public static void printStore() {
         System.out.println("********************************MOVIE STORE*******************************");
         System.out.println(store);
     }
+
 
 }
