@@ -26,6 +26,7 @@ public class Magazine {
         if (title == null || title.isBlank()){
             throw new IllegalArgumentException("Title cannot be null or blank");
         }
+        this.title = title;
     }
 
     public String getPublisher(){
@@ -36,6 +37,7 @@ public class Magazine {
         if (publisher == null || publisher.isBlank()){
             throw new IllegalArgumentException("Publisher cannot be null or blank");
         }
+        this.publisher = publisher;
     }
 
     public int getIssueNumber(){
@@ -46,6 +48,7 @@ public class Magazine {
         if (issueNumber <= 0) {
             throw new IllegalArgumentException("issue number cannot be equal zero or negative");
         }
+        this.issueNumber = issueNumber;
     }
 
     public int getPublicationYear(){
@@ -56,5 +59,6 @@ public class Magazine {
         if (publicationYear <= 0) {
             throw new IllegalArgumentException("PublicationYear cannot be equal zero or negative");
         }
+        this.publicationYear = publicationYear;
     }
 }
