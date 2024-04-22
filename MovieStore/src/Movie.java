@@ -20,6 +20,9 @@ public class Movie {
     }
 
     public void setName(String name){
+        if(name == null || name.isBlank()){
+            throw new IllegalArgumentException("Movie name cannot be null or empty");
+        }
         this.name = name;
     }
 
@@ -28,6 +31,9 @@ public class Movie {
     }
 
     public void setFormat(String format){
+        if(format == null || format.isBlank()){
+            throw new IllegalArgumentException("Movie format cannot be null or empty");
+        }
         this.format = format;
     }
 
@@ -36,6 +42,9 @@ public class Movie {
     }
 
     public void setRating(double rating){
+        if(rating < 0 || rating > 10){
+            throw new IllegalArgumentException("Movie rating cannot be negative or grate than 10 ");
+        }
         this.rating = rating;
     }
 

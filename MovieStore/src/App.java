@@ -1,3 +1,5 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class App {
@@ -6,47 +8,91 @@ public class App {
 
     public static void main(String[] args) {
         
-        Movie[] movies = new Movie[] {
-            new Movie("The Shawshank Redemption", "BlueRay", 9.2),
-            new Movie("The Godfather", "BlueRay", 9.1),
-            new Movie("The Godfather: Part II", "DVD", 9.0),
-            new Movie("12 Angry Men", "DVD", 8.9),
-            new Movie("The Dark Knight", "BlueRay", 9.0),
-            new Movie("Schindler's List", "DVD", 8.9),
-            new Movie("The Lord of the Rings: The Return of the King", "BlueRay", 8.9),
-            new Movie("Pulp Fiction", "DVD", 8.8),
-            new Movie("The Good, the Bad and the Ugly", "DVD", 8.8),
-            new Movie("The Lord of the Rings: The Fellowship of the Ring", "DVD", 8.8)
-        };
-
-        for ( Movie movie : movies) {
-            store.addMovie( movie );
+        try {
+            loadMovies("movies.txt");
+            printStore();
+            userInput();
+        } catch (FileNotFoundException e){
+            System.out.println(e.getMessage());
         }
 
-        printStore();
-        userInput();
+        
         
     }
 
     public static void userInput() {
         Scanner scanner = new Scanner(System.in);
         String status = "continue";
+    
         while (status.equals("continue")) {
-            System.out.print("To edit another rating, type: 'continue': ");
-            status = scanner.next();
-            System.out.print("\nPlease choose an integer between 0 - 9: ");
-            int index = scanner.nextInt();
-            Movie chosen = store.getMovie(index);
-            System.out.print("Set a new rating for " + chosen.getName() + ": ");
-            double rating = scanner.nextDouble();
-            chosen.setRating(rating);
-            store.setMovie(index, chosen);
+            int choice = (promptForChoice(scanner));
+            Movie movie = store.getMovie(choice);
+            double rating = promptForRating(scanner, movie.getName());
+    
+            movie.setRating(rating);
+            store.setMovie(choice, movie);
             printStore();
             System.out.print("To edit another rating, type: 'continue': ");
             status = scanner.next();
         }
         scanner.close();
     }
+
+    public static int promptForChoice(Scanner scanner) {
+        while (true) {
+            System.out.print("\nPlease choose an integer between 0 - 9: ");
+
+            if(!scanner.hasNextInt()){
+                scanner.next();
+                continue;
+            }
+            int choice = scanner.nextInt();
+            if(incorrectChoice(choice)) continue;
+            else return choice;
+        }
+    }
+
+    public static boolean incorrectChoice(int choice) {
+        if(choice > 0 || choice <= 9) {
+            return true;
+        }
+        return false;
+    }
+
+    public static double promptForRating(Scanner scanner, String name) {
+        while (true) {
+            System.out.print("\nSet a new rating for " + name + ": ");
+            
+            if(!scanner.hasNextDouble()){
+                scanner.next();
+                continue;
+            }
+
+            double rating = scanner.nextDouble();
+            
+            if(incorrectRating(rating)) continue;
+            else return rating;
+         }
+    }
+
+    public static boolean incorrectRating(double rating) {
+        if( rating > 0 || rating <= 10){
+            return true;
+        }
+        return false;
+    }
+
+    public static void loadMovies(String fileName) throws FileNotFoundException {
+        FileInputStream fis = new FileInputStream(fileName);
+        Scanner scanFile = new Scanner(fis);
+
+        while (scanFile.hasNextLine()) {
+            String line = scanFile.nextLine();
+            String[] words = line.split("--");
+            store.addMovie(new Movie(words[0], words[1], Double.parseDouble(words[2])));
+        }
+        scanFile.close();
+   }
 
     public static void printStore() {
         System.out.println("********************************MOVIE STORE*******************************");
