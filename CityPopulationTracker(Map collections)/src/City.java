@@ -1,9 +1,9 @@
 public class City {
     private String name;
     private String country;
-    private long population;
+    private int population;
 
-    public City(String name, String country, long population) {
+    public City(String name, String country, int population) {
         setName(name);
         setCountry(country);
         setPopulation(population);
@@ -37,11 +37,11 @@ public class City {
         this.country = country;
     }
 
-    public long getPopulation() {
+    public int getPopulation() {
         return this.population;
     }
 
-    public void setPopulation(long population) {
+    public void setPopulation(int population) {
         if (population <= 0) {
             throw new IllegalArgumentException("Population must be greater than 0.");
         }
