@@ -1,4 +1,4 @@
-package model;
+package constants;
 
 public class Regulations {
     public static final int COURT_LENGTH = 94;

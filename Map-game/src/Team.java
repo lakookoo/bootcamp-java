@@ -1,11 +1,12 @@
-package model;
 import java.util.HashMap;
 import java.util.Map;
+
+import constants.Position;
 
 public class Team {
 
     private String name;
-    private Map<String, String> players;
+    private Map<Position, String> players;
 
     public Team(String name) {
         this.name = name;
@@ -20,11 +21,14 @@ public class Team {
         this.name = name;
     }
 
-    public String getPlayer(String position) {
+    public String getPlayer(Position position) {
         return this.players.get(position);
     }
 
-    public void setPlayer(String position, String player) {
+    public void setPlayer(Position position, String player) {
+        if (position == null) {
+            throw new IllegalArgumentException("Position cannot be null");
+        }
         this.players.put(position, player);
     }    
 
