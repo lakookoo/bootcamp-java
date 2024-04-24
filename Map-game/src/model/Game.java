@@ -1,6 +1,8 @@
 package model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+//import model.Regulations;
+
 
 public class Game {
     
@@ -23,5 +25,21 @@ public class Game {
         "\n - Let's give a warm round of applause for both teams as they take the court!"
         );
     }
+
+    public String details() {
+        return
+            "\nArena: " + this.arena + 
+            "\nDate: " + this.date.toString() +
+            "\nCourt length (feet): " + Regulations.COURT_LENGTH + 
+            "\nRim height (feet): " + Regulations.RIM_HEIGHT + 
+            "\nDistance from three-point arc: " + Regulations.THREE_POINT_DISTANCE + 
+            "\nPoints awarded beyond the three-point arc: " + Regulations.BEYOND_THREE_POINT_ARC +
+            "\nPoints awarded inside the three-point arc: " + Regulations.INSIDE_THREE_POINT_ARC +
+            "\nPoints awarded from a free throw: " + Regulations.FREE_THROW + 
+            "\nLength of each quarter (minutes): " + Regulations.QUARTER_LENGTH +
+            "\nSeconds to attempt shot after gaining possession: " + Regulations.POSSESSION_TIME;
+    }
+
+
 
 }

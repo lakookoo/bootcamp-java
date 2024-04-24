@@ -20,7 +20,10 @@ public class App {
 
         Game game = new Game("Etihad Stadium");
         game.begin(bulls, pistons);
+        System.out.println(game.details());
     }
+
+    
 
 }
     
