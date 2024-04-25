@@ -12,6 +12,12 @@ public abstract class LabEquipment {
         setModel(model);
         setYear(year);
     }
+
+    public LabEquipment(LabEquipment source) {
+        setManufacturer(source.manufacturer);
+        setModel(source.model);
+        setYear(source.year);
+    }
     
 
     public String getManufacturer(){
