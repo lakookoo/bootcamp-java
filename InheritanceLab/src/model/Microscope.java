@@ -31,4 +31,10 @@ public class Microscope extends LabEquipment{
         return "Microscope maintenance: Clean the lenses and check the light source.";
     }
 
+    @Override
+    public LabEquipment clone() {
+        LabEquipment copy = this;
+        return copy;
+    }
+
 }

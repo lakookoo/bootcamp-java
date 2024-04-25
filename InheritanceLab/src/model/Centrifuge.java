@@ -31,4 +31,9 @@ public class Centrifuge extends LabEquipment{
         return "Centrifuge maintenance: Check the rotor, clean the chamber, and lubricate the spindle.";
     }
 
+    @Override
+    public LabEquipment clone() {
+        return this;
+    }
+
 }
