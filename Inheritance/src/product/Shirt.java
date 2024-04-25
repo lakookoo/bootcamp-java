@@ -27,5 +27,10 @@ public class Shirt extends Product{
         System.out.println("fold from bottom up");
     }
 
+    @Override
+    public void wear() {
+        System.out.println("The " + this.size + "looks great on you!");
+    }
+
 
 }

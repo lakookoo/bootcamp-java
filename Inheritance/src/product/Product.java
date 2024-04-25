@@ -38,4 +38,6 @@ public abstract class Product {
     public void fold(){
         System.out.println("\n folding my " + this.getBrand() + " " + this.getClass().getSimpleName());
     }
+
+    public abstract void wear();
 }

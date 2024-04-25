@@ -18,5 +18,6 @@ public class App {
 
     public static void productStore(Product product){
         System.out.println("Thank you for purchasing the " + product.getBrand() + " " + product.getClass().getSimpleName().toLowerCase() + ". Your totatal comes to  " + product.getPrice());
+        product.wear();
     }
 }
