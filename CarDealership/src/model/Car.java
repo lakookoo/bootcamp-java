@@ -13,7 +13,7 @@ public class Car {
         setMake(make);
         setModel(model);
         setBodyType(bodyType);
-        setproductionYear(productionYear);
+        setProductionYear(productionYear);
         setPrice(price);
     }
 
@@ -21,7 +21,7 @@ public class Car {
         setMake(source.make);
         setModel(source.model);
         setBodyType(source.bodyType);
-        setproductionYear(source.productionYear);
+        setProductionYear(source.productionYear);
         setPrice(source.price);
     }
 
@@ -63,7 +63,7 @@ public class Car {
         return productionYear;
     }
 
-    public void setproductionYear(int productionYear){
+    public void setProductionYear(int productionYear){
         if(productionYear <= 0){
             throw new IllegalArgumentException("Production year cannot be null or blank");
         }
