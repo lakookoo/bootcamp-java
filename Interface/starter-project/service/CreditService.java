@@ -1,9 +1,12 @@
 package service;
 
 import repository.AccountRepository;
+
+import java.math.BigDecimal;
+
 import pojo.Credit;
 
-public class CreditService {
+public class CreditService implements AccountService{
 
     AccountRepository accountRepository;
 
@@ -24,6 +27,21 @@ public class CreditService {
 
     public void deleteAccount(String id) {
         this.accountRepository.deleteAccount(id);;
+    }
+
+    @Override
+    public void deposit(String id, BigDecimal amount) {
+       Credit account = retrieveAccount(id);
+       account.setCredit(account.getCredit().subtract(amount));
+        updateAccount(account);
+    }
+
+    @Override
+    public void withdraw(String id, BigDecimal amount) {
+        Credit account = retrieveAccount(id);
+        account.setCredit(account.getCredit().add(amount));
+        updateAccount(account);
+        
     }
 
 }
